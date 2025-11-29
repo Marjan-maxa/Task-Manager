@@ -1,8 +1,11 @@
+import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
+import 'package:task_management/UI/screens/sign_up_screen.dart';
 
 import 'package:task_management/UI/widgets/screen_backround.dart';
 
 import 'forget_passward_email_varified.dart';
+import 'nav_bar_holder_screen.dart';
 
 class LoginPage extends StatefulWidget {
   const LoginPage({super.key});
@@ -17,6 +20,11 @@ class _LoginPageState extends State<LoginPage> {
 
   @override
   Widget build(BuildContext context) {
+
+    void ontapSingup()
+    {
+      Navigator.push(context, MaterialPageRoute(builder: (context)=>SingUpScreen()));
+    }
 
     void ontapForgetPassward()
     {
@@ -63,7 +71,9 @@ class _LoginPageState extends State<LoginPage> {
               ),
               const SizedBox(height: 20,),
              FilledButton(
-                 onPressed: (){}, child: Icon(Icons.arrow_circle_right_outlined,size: 23,)
+                 onPressed: (){
+                   Navigator.pushReplacement(context, MaterialPageRoute(builder: (context)=>NavBarHolderScreen()));
+                 }, child: Icon(Icons.arrow_circle_right_outlined,size: 23,)
              ),
               const SizedBox(height: 35,),
               Center(
@@ -75,6 +85,7 @@ class _LoginPageState extends State<LoginPage> {
                         children: [
                           TextSpan(
                               text: 'Sing up',
+                              recognizer: TapGestureRecognizer()..onTap=ontapSingup,
                               style: TextStyle(
                                   color: Colors.green
                               )

@@ -38,7 +38,7 @@ class ForgetPasswardEmailVarified extends StatelessWidget {
               Center(
                 child: Column(
                   children: [
-                    TextButton(onPressed: (){}, child: Text('Forget Passward?'),),
+                   const SizedBox(height: 20,),
                     RichText(text: TextSpan(
                       text: "Have an account? ",
                       children: [

@@ -1,13 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:pin_code_fields/pin_code_fields.dart';
-import 'package:task_management/UI/screens/reset_passward_screen.dart';
 import 'package:task_management/UI/widgets/screen_backround.dart';
 
-import 'forget_passward_email_varified.dart';
 import 'forget_passward_varified_otp_screen.dart';
 
-class ForgetPasswardVarifiedOtpScreen extends StatelessWidget {
-  const ForgetPasswardVarifiedOtpScreen({super.key});
+class SingUpScreen extends StatelessWidget {
+  const SingUpScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -19,45 +16,51 @@ class ForgetPasswardVarifiedOtpScreen extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               const SizedBox(height: 150,),
-              Text('Pin Varification',
+              Text('Join With Us',
                 style: Theme.of(context).textTheme.titleLarge,),
               const SizedBox(height: 10,),
-              Text('A 6 digits OTP sent your email address',style: Theme.of(context).textTheme.bodyLarge?.copyWith(
-                  color: Colors.grey
-              )),
-              const SizedBox(height: 10,),
-              PinCodeTextField(
-                length: 6,
-                keyboardType: TextInputType.number,
-                obscureText: false,
-                animationType: AnimationType.fade,
-                pinTheme: PinTheme(
-                  shape: PinCodeFieldShape.box,
-                  borderRadius: BorderRadius.circular(8),
-                  fieldHeight: 50,
-                  fieldWidth: 40,
-                  activeFillColor: Colors.white,
-                  inactiveColor: Colors.grey.shade300,
-                  selectedColor: Colors.green
+              TextFormField(
+                decoration: InputDecoration(
+                  hintText: ' Email',
                 ),
-                animationDuration: Duration(milliseconds: 300),
-                backgroundColor: Colors.transparent,
-                appContext: context,
-
+              ),
+              const SizedBox(height: 15,),
+              TextFormField(
+                decoration: InputDecoration(
+                  hintText: 'First Name',
+                ),
+              ),
+              const SizedBox(height: 20,),
+              TextFormField(
+                decoration: InputDecoration(
+                  hintText: 'Last Name',
+                ),
+              ),
+              const SizedBox(height: 20,),
+              TextFormField(
+                decoration: InputDecoration(
+                  hintText: 'Mobile',
+                ),
+              ),
+              const SizedBox(height: 20,),
+              TextFormField(
+                decoration: InputDecoration(
+                  hintText: ' Passward',
+                ),
               ),
               const SizedBox(height: 20,),
               FilledButton(
                   onPressed: (){
-                    Navigator.push(context, MaterialPageRoute(builder: (context)=>ResetPasswaardScreen()));
+                    Navigator.push(context, MaterialPageRoute(builder: (context)=>ForgetPasswardVarifiedOtpScreen()));
                   }, child: Icon(Icons.arrow_circle_right_outlined,size: 23,)
               ),
 
               Center(
                 child: Column(
                   children: [
-                   const SizedBox(height: 20,),
+                    const SizedBox(height: 20,),
                     RichText(text: TextSpan(
-                      text: "Have an account? ",
+                      text: "Have account? ",
                       children: [
                         TextSpan(
                             text: 'Sing in',
