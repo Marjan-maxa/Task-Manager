@@ -28,9 +28,9 @@ class _SplashScreenState extends State<SplashScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       body: ScreenBackround(child: Center(
-            child: SvgPicture.asset(AssetPath.logoPathSvg,
-              height: 50,
-            ),
+            child: Text('Task Manager',style: Theme.of(context).textTheme.displayMedium?.copyWith(
+              color: Colors.green,fontWeight: FontWeight.bold, fontStyle: FontStyle.italic
+            ),)
           )
       ),
       );

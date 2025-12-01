@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import '../widgets/taskManager_app_bar.dart';
 import '../widgets/task_card_wi.dart';
 import '../widgets/task_count_bystatus.dart';
+import 'add_new_task_screen.dart';
 class NewTaskScreen extends StatefulWidget {
   const NewTaskScreen({super.key});
 
@@ -46,6 +47,12 @@ class _NewTaskScreenState extends State<NewTaskScreen> {
 
         ],
       ),
+      floatingActionButton: FloatingActionButton(
+      backgroundColor: Colors.green,
+        foregroundColor: Colors.white,
+        onPressed: (){
+        Navigator.push(context, MaterialPageRoute(builder: (context)=>AddNewTaskScreen()));
+        }, child: Icon(Icons.add),),
     );
   }
 }

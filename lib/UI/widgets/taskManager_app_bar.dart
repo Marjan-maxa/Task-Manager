@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 
+import '../screens/update_profile_screen.dart';
+
 class task_manager_appBar extends StatelessWidget implements PreferredSizeWidget {
   const task_manager_appBar({
     super.key,
@@ -12,22 +14,27 @@ class task_manager_appBar extends StatelessWidget implements PreferredSizeWidget
         IconButton(onPressed: (){}, icon: Icon(Icons.logout))
       ],
       backgroundColor: Colors.green,
-      title: Row(
-        children: [
-          CircleAvatar(),
-          const SizedBox(width: 10,),
-          Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Text('Md. Marjan',style: Theme.of(context).textTheme.titleSmall?.copyWith(
-                  color: Colors.white
-              ),),
-              Text('Abc@gmail.com',style: Theme.of(context).textTheme.bodySmall?.copyWith(
-                  color: Colors.white
-              ),),
-            ],
-          )
-        ],
+      title: InkWell(
+        onTap: (){
+          Navigator.push(context, MaterialPageRoute(builder: (context)=>UpdateProfileScreen()));
+        },
+        child: Row(
+          children: [
+            CircleAvatar(),
+            const SizedBox(width: 10,),
+            Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Text('Md. Marjan',style: Theme.of(context).textTheme.titleSmall?.copyWith(
+                    color: Colors.white
+                ),),
+                Text('Abc@gmail.com',style: Theme.of(context).textTheme.bodySmall?.copyWith(
+                    color: Colors.white
+                ),),
+              ],
+            )
+          ],
+        ),
       ),
     );
   }

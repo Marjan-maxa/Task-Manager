@@ -30,7 +30,8 @@ class TaskManagement extends StatelessWidget {
           titleLarge:TextStyle(
             fontSize: 26,
             color: Colors.black,
-            fontWeight: FontWeight.w600
+            fontWeight: FontWeight.w600,
+
           ),
         ),
         filledButtonTheme: FilledButtonThemeData(
