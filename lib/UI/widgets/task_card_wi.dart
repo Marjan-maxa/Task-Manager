@@ -2,8 +2,12 @@ import 'package:flutter/material.dart';
 
 class task_card extends StatelessWidget {
   const task_card({
-    super.key,
+    super.key, required this.status, required this.cardColor,
   });
+
+  final String status;
+  final Color cardColor;
+
 
   @override
   Widget build(BuildContext context) {
@@ -15,7 +19,9 @@ class task_card extends StatelessWidget {
           shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.circular(8)
           ),
-          title: Text('this is task',style: Theme.of(context).textTheme.titleLarge,),
+          title: Text('this is task',style: Theme.of(context).textTheme.titleLarge!.copyWith(
+            fontSize: 18
+          ),),
           subtitle: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
@@ -23,8 +29,8 @@ class task_card extends StatelessWidget {
               Text('Date:29/11/25'),
               Row(
                 children: [
-                  Chip(label: Text('New'),
-                    backgroundColor: Colors.blue,
+                  Chip(label: Text(status),
+                    backgroundColor: cardColor,
                     labelStyle: TextStyle(color: Colors.white),
                     padding: EdgeInsets.symmetric(horizontal: 19),
                     shape: RoundedRectangleBorder(

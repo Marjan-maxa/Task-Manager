@@ -2,6 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:task_management/UI/screens/new_task_screen.dart';
 import 'package:task_management/UI/screens/progress_task_screen.dart';
 
+import 'cencelled_task_screen.dart';
+import 'completed_task_screen.dart';
+
 class NavBarHolderScreen extends StatefulWidget {
   const NavBarHolderScreen({super.key});
 
@@ -13,8 +16,8 @@ class _NavBarHolderScreenState extends State<NavBarHolderScreen> {
   int _selectedIndex=0;
  List<Widget> _screens=[
    NewTaskScreen(),
-   ProgressTaskScreen(),
-   ProgressTaskScreen(),
+   CompletedTaskScreen(),
+   CencelledTaskScreen(),
    ProgressTaskScreen(),
  ];
 
@@ -31,10 +34,10 @@ class _NavBarHolderScreenState extends State<NavBarHolderScreen> {
           });
           },
           destinations: [
-        NavigationDestination(icon: Icon(Icons.refresh), label: 'New Task'),
-        NavigationDestination(icon: Icon(Icons.refresh), label: 'Completed'),
+        NavigationDestination(icon: Icon(Icons.add_circle), label: 'New Task'),
+        NavigationDestination(icon: Icon(Icons.done_all), label: 'Completed'),
         NavigationDestination(icon: Icon(Icons.close), label: 'Cancelled'),
-        NavigationDestination(icon: Icon(Icons.done_all), label: 'Progress'),
+        NavigationDestination(icon: Icon(Icons.refresh), label: 'Progress'),
       ]),
     );
   }
