@@ -18,7 +18,7 @@ class _CencelledTaskScreenState extends State<CencelledTaskScreen> {
       body: Padding(
         padding: const EdgeInsets.symmetric(horizontal: 10.0),
         child: ListView.separated(itemBuilder: (context,index){
-          return task_card(status: 'Completed', cardColor: Colors.purple,);
+          return task_card(status: 'Completed', cardColor: Colors.red,);
         }, separatorBuilder: (context,index){
           return SizedBox(height: 10,);
         }, itemCount: 10),

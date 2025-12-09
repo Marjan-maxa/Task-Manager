@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:task_management/UI/screens/update_profile_screen.dart';
 import 'UI/screens/login_page.dart';
+import 'UI/screens/nav_bar_holder_screen.dart';
+import 'UI/screens/sign_up_screen.dart';
 import 'UI/screens/splash_screen.dart';
 
 class TaskManagement extends StatelessWidget {
@@ -51,7 +54,16 @@ class TaskManagement extends StatelessWidget {
           )
         )
       ),
-      home: SplashScreen(),
+      initialRoute: '/SplashScreen',
+      routes: {
+        '/SplashScreen':(_)=>SplashScreen(),
+        '/Login':(_)=>LoginPage(),
+        '/SignUp':(_)=>SingUpScreen(),
+        '/NavBar':(_)=>NavBarHolderScreen(),
+        '/SplashScreen':(_)=>SplashScreen(),
+        '/UpdatePrfile':(_)=>UpdateProfileScreen(),
+      },
+
     );
   }
 }
