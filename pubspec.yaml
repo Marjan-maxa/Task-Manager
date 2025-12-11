@@ -26,6 +26,9 @@ dev_dependencies:
   flutter_svg: ^2.2.3
   http: ^1.6.0
   logger: ^2.6.2
+  shared_preferences:
+
+
 
 flutter:
 

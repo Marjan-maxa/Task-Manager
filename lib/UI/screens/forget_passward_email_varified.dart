@@ -28,6 +28,7 @@ class ForgetPasswardEmailVarified extends StatelessWidget {
                   hintText: ' Email',
                 ),
               ),
+              
               const SizedBox(height: 20,),
               FilledButton(
                   onPressed: (){

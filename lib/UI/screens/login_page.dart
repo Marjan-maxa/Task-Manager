@@ -174,7 +174,11 @@ class _LoginPageState extends State<LoginPage> {
     if(response.isSuccess){
       _clearTextFeild();
       ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text('SingIn Success!'),
-        backgroundColor: Colors.green,duration: Duration(seconds: 3),));
+        backgroundColor: Colors.green,duration: Duration(seconds: 3),)
+
+      );
+
+
       Navigator.pushReplacement(context, MaterialPageRoute(builder: (context)=>NavBarHolderScreen()));
     }
 
