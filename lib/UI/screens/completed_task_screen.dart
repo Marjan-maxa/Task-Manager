@@ -18,7 +18,8 @@ class _CompletedTaskScreenState extends State<CompletedTaskScreen> {
       body: Padding(
         padding: const EdgeInsets.symmetric(horizontal: 10.0),
         child: ListView.separated(itemBuilder: (context,index){
-          return task_card(status: 'Completed', cardColor: Colors.green,);
+          Text('');
+          // return task_card(status: 'Completed', cardColor: Colors.green,);
         }, separatorBuilder: (context,index){
           return SizedBox(height: 10,);
         }, itemCount: 10),

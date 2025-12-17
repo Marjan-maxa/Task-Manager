@@ -23,12 +23,12 @@ UserModel({required this.id,
   required this.mobile, required this.photo});
 
  factory UserModel.fromJson(Map<String,dynamic>jsonData){
-  return UserModel(id: jsonData['id'],
-      email: jsonData['email'],
-      firstName: jsonData['firstName'],
-      lastName: jsonData['lastName'],
-      mobile: jsonData['mobile'],
-    photo: jsonData['photo']??'',
+  return UserModel(id: jsonData['id']??'',
+      email: jsonData['email']??'',
+      firstName: jsonData['firstName']??'',
+      lastName: jsonData['lastName']??'',
+      mobile: jsonData['mobile']??'',
+    photo: jsonData['mobile']??'',
   );
   }
 

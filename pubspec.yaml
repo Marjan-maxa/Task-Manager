@@ -38,6 +38,6 @@ flutter:
 
    assets:
      - assets/images/background.svg
-     - assets/images/logo.svg
+     - assets/images/pen.jpg
 
 

@@ -1,23 +1,33 @@
 import 'dart:convert';
+import 'package:flutter/cupertino.dart';
 import 'package:logger/logger.dart';
 import 'package:http/http.dart';
+import 'package:task_management/UI/controller/auth_controller.dart';
+
+import '../../app.dart';
 class ApiCaller{
 
   static final Logger _logger=Logger();
 
-  Future<ApiResponse> getRequest({required String url })
+ static Future<ApiResponse> getRequest({required String url })
   async {
    try{
      Uri uri=Uri.parse(url);
      logRequest(url);
-     Response response =await get(uri);
+     Response response =await get(uri,headers: {
+       'token':AuthController.accessToken??''
+     });
      logReponse(url, response);
      final int statusCode=response.statusCode;
      final decodedData=jsonDecode(response.body);
      if(statusCode==200)
      {
        return ApiResponse(responseCode: statusCode, responseData: decodedData, isSuccess: true);
-     }else{
+     }else if(statusCode==401){
+       moveToLogin();
+       return ApiResponse(responseCode: -1, responseData: null, isSuccess: false);
+     }
+     else{
        return ApiResponse(responseCode: statusCode, responseData: decodedData, isSuccess: false);
      }
    }catch(e){
@@ -25,7 +35,7 @@ class ApiCaller{
    }
   }
 
-  Future<ApiResponse> postRequest({required String url,Map<String,dynamic>? body })
+ static Future<ApiResponse> postRequest({required String url,Map<String,dynamic>? body })
   async {
     try{
       Uri uri=Uri.parse(url);
@@ -35,6 +45,7 @@ class ApiCaller{
         headers: {
           'Accept':'application/json',
           'Content-Type':'application/json',
+          'token':AuthController.accessToken??''
         }
       );
       logReponse(url, response);
@@ -43,12 +54,17 @@ class ApiCaller{
       if(statusCode==200 || statusCode==201)
       {
         return ApiResponse(responseCode: statusCode, responseData: decodedData, isSuccess: true);
-      }else{
+      }else if(statusCode==401){
+        moveToLogin();
+        return ApiResponse(responseCode: -1, responseData: null, isSuccess: false);
+      }
+      else{
         return ApiResponse(responseCode: statusCode, responseData: decodedData, isSuccess: false);
       }
     }catch(e){
       return ApiResponse(responseCode: -1, responseData: null, isSuccess: false,errorMessage: e.toString());
     }
+
   }
 
   static void logRequest(String Url, {Map<String, dynamic>? body})
@@ -66,6 +82,12 @@ class ApiCaller{
             'Response body=> ${response.body}\n'
     );
   }
+
+  static Future<void> moveToLogin()async {
+   AuthController.userClearData();
+   Navigator.pushNamedAndRemoveUntil(TaskManagement.navigator.currentContext!, '/Login', (predicate)=>false);
+  }
+
 
  }
 

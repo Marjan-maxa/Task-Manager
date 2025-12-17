@@ -200,7 +200,7 @@ setState(() {
       "mobile":_mobileController.text,
       "password":_passwardController.text,
     };
-    final ApiResponse response=await ApiCaller().postRequest(
+    final ApiResponse response=await ApiCaller.postRequest(
       url: Urls.registrationUrl,
       body: requestBody,
     );

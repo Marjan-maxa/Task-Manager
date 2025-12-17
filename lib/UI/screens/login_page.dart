@@ -1,8 +1,10 @@
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
+import 'package:task_management/UI/controller/auth_controller.dart';
 import 'package:task_management/UI/screens/sign_up_screen.dart';
 
 import 'package:task_management/UI/widgets/screen_backround.dart';
+import 'package:task_management/data/model/user_model.dart';
 
 import '../../data/Utils/urls.dart';
 import '../../data/services/api_caller.dart';
@@ -164,7 +166,7 @@ class _LoginPageState extends State<LoginPage> {
 
       "password":_passwardController.text,
     };
-    final ApiResponse response=await ApiCaller().postRequest(
+    final ApiResponse response=await ApiCaller.postRequest(
       url: Urls.loginUrl,
       body: requestBody,
     );
@@ -172,6 +174,10 @@ class _LoginPageState extends State<LoginPage> {
       _singInProgress=false;
     });
     if(response.isSuccess){
+      UserModel model=UserModel.fromJson(response.responseData);
+      String accessToken=response.responseData['token'];
+      await AuthController .saveUserData(model, accessToken);
+
       _clearTextFeild();
       ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text('SingIn Success!'),
         backgroundColor: Colors.green,duration: Duration(seconds: 3),)

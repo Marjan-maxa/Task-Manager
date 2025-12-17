@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:task_management/UI/controller/auth_controller.dart';
 
 import '../screens/update_profile_screen.dart';
 
@@ -11,7 +12,11 @@ class task_manager_appBar extends StatelessWidget implements PreferredSizeWidget
   Widget build(BuildContext context) {
     return AppBar(
       actions: [
-        IconButton(onPressed: (){}, icon: Icon(Icons.logout))
+        IconButton(onPressed: (){
+         AuthController.userClearData();
+         Navigator.pushNamedAndRemoveUntil(context, '/Login', (predicate)=>false);
+
+        }, icon: Icon(Icons.logout))
       ],
       backgroundColor: Colors.green,
       title: InkWell(
@@ -32,7 +37,7 @@ class task_manager_appBar extends StatelessWidget implements PreferredSizeWidget
                     color: Colors.white
                 ),),
               ],
-            )
+            ),
           ],
         ),
       ),

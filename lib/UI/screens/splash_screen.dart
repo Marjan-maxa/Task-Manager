@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:task_management/UI/controller/auth_controller.dart';
 import 'package:task_management/UI/utils/assets_path.dart';
 import 'package:task_management/UI/widgets/screen_backround.dart';
 
@@ -22,16 +23,22 @@ class _SplashScreenState extends State<SplashScreen> {
   Future<void>moveToNextScreen()
   async {
     await Future.delayed(Duration(seconds: 3));
-    Navigator.pushReplacement(context, MaterialPageRoute(builder: (context)=>LoginPage()));
+
+    final bool isLogInn=await AuthController.isLogIn();
+
+    if(isLogInn){
+      Navigator.pushReplacementNamed(context, '/NavBar');
+    }else{
+      Navigator.pushReplacement(context, MaterialPageRoute(builder: (context)=>LoginPage()));
+    }
+
   }
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       body: ScreenBackround(child: Center(
-            child: Text('Task Manager',style: Theme.of(context).textTheme.displayMedium?.copyWith(
-              color: Colors.green,fontWeight: FontWeight.bold, fontStyle: FontStyle.italic
-            ),)
-          )
+            child: Image.asset('assets/images/pen.jpg',)
+          ),
       ),
       );
 
