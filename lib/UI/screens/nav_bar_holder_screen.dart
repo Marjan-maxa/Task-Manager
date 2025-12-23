@@ -16,9 +16,12 @@ class _NavBarHolderScreenState extends State<NavBarHolderScreen> {
   int _selectedIndex=0;
  List<Widget> _screens=[
    NewTaskScreen(),
+   ProgressTaskScreen(),
    CompletedTaskScreen(),
    CencelledTaskScreen(),
-   ProgressTaskScreen(),
+
+
+
  ];
 
   @override
@@ -35,9 +38,12 @@ class _NavBarHolderScreenState extends State<NavBarHolderScreen> {
           },
           destinations: [
         NavigationDestination(icon: Icon(Icons.add_circle), label: 'New Task'),
-        NavigationDestination(icon: Icon(Icons.done_all), label: 'Completed'),
-        NavigationDestination(icon: Icon(Icons.close), label: 'Cancelled'),
-        NavigationDestination(icon: Icon(Icons.refresh), label: 'Progress'),
+            NavigationDestination(icon: Icon(Icons.refresh), label: 'Progress'),
+            NavigationDestination(icon: Icon(Icons.done_all), label: 'Completed'),
+            NavigationDestination(icon: Icon(Icons.close), label: 'Cancelled'),
+
+
+
       ]),
     );
   }

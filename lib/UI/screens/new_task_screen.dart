@@ -116,6 +116,9 @@ setState(() {
                 return task_card(taskModel: newtaskList[index],
                   cardColor: Colors.blue,
                   refreshParent: (){
+                    _getAllNewtaskCount();
+                    _getAlltaskCount();
+
                   },
                 );
               }, separatorBuilder: (context,index){

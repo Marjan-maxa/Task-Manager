@@ -26,6 +26,7 @@ class AuthController {
     String ? token = sharedPreferences.getString(_accessTokenKey);
 
     if(token != null){
+
       String ? userData = sharedPreferences.getString(_userModelKey);
       userModel = UserModel.fromJson(jsonDecode(userData!)) ;
     }
