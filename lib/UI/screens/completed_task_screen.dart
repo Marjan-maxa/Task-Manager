@@ -57,17 +57,23 @@ class _CompletedTaskScreenState extends State<CompletedTaskScreen> {
       appBar: task_manager_appBar(),
       body: Padding(
         padding: const EdgeInsets.symmetric(horizontal: 10.0),
-        child: ListView.separated(
-          itemCount: _completedTaskList.length,
-          itemBuilder: (context,index){
-            return task_card(taskModel: _completedTaskList[index],
-              cardColor: Colors.blue,
-              refreshParent: (){
-              },
-            );
-          }, separatorBuilder: (context,index){
-          return SizedBox(height: 10,);
-        }, ),
+        child: Visibility(
+          visible: isloading==false,
+          replacement: Center(child: CircularProgressIndicator()),
+          child: ListView.separated(
+            itemCount: _completedTaskList.length,
+            itemBuilder: (context,index){
+              return task_card(taskModel: _completedTaskList[index],
+                cardColor: Colors.blue,
+                refreshParent: (){
+                  _getAllTask();
+
+                },
+              );
+            }, separatorBuilder: (context,index){
+            return SizedBox(height: 10,);
+          }, ),
+        ),
       ),
     );
   }

@@ -93,37 +93,45 @@ setState(() {
           SizedBox(
             height: 90,
 
-            child: ListView.separated(
-              scrollDirection: Axis.horizontal,
-              itemCount: taskStatusCountlist.length,
-              itemBuilder: (context,index){
-                return Task_Count_ByStatus(title: taskStatusCountlist[index].status,
-                  count: taskStatusCountlist[index].count,);
-              },
-              separatorBuilder: (context,index){
-                return SizedBox(width: 4,);
+            child: Visibility(
+              visible: _getTaskStatusCountProgress==false,
+              replacement: Center(child: CircularProgressIndicator()),
+              child: ListView.separated(
+                scrollDirection: Axis.horizontal,
+                itemCount: taskStatusCountlist.length,
+                itemBuilder: (context,index){
+                  return Task_Count_ByStatus(title: taskStatusCountlist[index].status,
+                    count: taskStatusCountlist[index].count,);
+                },
+                separatorBuilder: (context,index){
+                  return SizedBox(width: 4,);
 
-              },
+                },
+              ),
             ),
           ),
 
 
 
           Expanded(
-            child: ListView.separated(
-              itemCount: newtaskList.length,
-              itemBuilder: (context,index){
-                return task_card(taskModel: newtaskList[index],
-                  cardColor: Colors.blue,
-                  refreshParent: (){
-                    _getAllNewtaskCount();
-                    _getAlltaskCount();
+            child: Visibility(
+              visible: _getNewTaskProgress==false,
+              replacement: Center(child: CircularProgressIndicator()),
+              child: ListView.separated(
+                itemCount: newtaskList.length,
+                itemBuilder: (context,index){
+                  return task_card(taskModel: newtaskList[index],
+                    cardColor: Colors.blue,
+                    refreshParent: (){
+                      _getAllNewtaskCount();
+                      _getAlltaskCount();
 
-                  },
-                );
-              }, separatorBuilder: (context,index){
-              return SizedBox(height: 10,);
-            }, ),
+                    },
+                  );
+                }, separatorBuilder: (context,index){
+                return SizedBox(height: 10,);
+              }, ),
+            ),
           )
 
         ],

@@ -85,10 +85,12 @@ class ApiCaller{
 
   static Future<void> moveToLogin()async {
    AuthController.userClearData();
+   final context = TaskManagement.navigator.currentContext;
+   if (context == null) return;
    Navigator.pushNamedAndRemoveUntil(TaskManagement.navigator.currentContext!, '/Login', (predicate)=>false);
   }
 
-
+//
  }
 
 // reponse

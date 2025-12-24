@@ -107,6 +107,7 @@ class _AddNewTaskScreenState extends State<AddNewTaskScreen> {
     if(response.isSuccess){
       _clearFeild();
       showSnackBarMessage(context, 'New task Added');
+      Navigator.pushNamedAndRemoveUntil(context, '/NavBar', (predicate)=>false);
     }else{
       showSnackBarMessage(context, response.errorMessage!);
     }

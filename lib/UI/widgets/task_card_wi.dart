@@ -22,6 +22,7 @@ class _task_cardState extends State<task_card> {
 
 
   bool _changeStatusInProgress = false;
+  bool _deleteLoading=false;
 
   Future<void> _changeStatus(String status) async {
     _changeStatusInProgress = true;
@@ -39,6 +40,21 @@ class _task_cardState extends State<task_card> {
       widget.refreshParent();
       Navigator.pop(context);
 
+    }else{
+      showSnackBarMessage(context, response.errorMessage.toString());
+    }
+  }
+
+  Future<void>deleteTask() async {
+    _deleteLoading=true;
+    final ApiResponse response=await ApiCaller.getRequest(url: Urls.deleteTaskUrl(widget.taskModel.id));
+    _deleteLoading=false;
+    setState(() {
+
+    });
+    if(response.isSuccess){
+      widget.refreshParent();
+      showSnackBarMessage(context, 'Task deleted successfully !');
     }else{
       showSnackBarMessage(context, response.errorMessage.toString());
     }
@@ -118,7 +134,9 @@ class _task_cardState extends State<task_card> {
                     _showChangeStatusDialog();
 
                   }, icon: Icon(Icons.edit_note_outlined,color: Colors.green,)),
-                  IconButton(onPressed: (){}, icon: Icon(Icons.delete,color: Colors.red,))
+                  IconButton(onPressed: (){
+                    deleteTask();
+                  }, icon: Icon(Icons.delete,color: Colors.red,))
                 ],
               )
             ],

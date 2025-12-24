@@ -53,17 +53,23 @@ class _ProgressTaskScreenState extends State<ProgressTaskScreen> {
       appBar: task_manager_appBar(),
       body: Padding(
         padding: const EdgeInsets.symmetric(horizontal: 10.0),
-        child: ListView.separated(
-        itemCount: _progressTaskList.length,
-        itemBuilder: (context,index){
-          return task_card(taskModel: _progressTaskList[index],
-            cardColor: Colors.blue,
-            refreshParent: (){
-            },
-          );
-        }, separatorBuilder: (context,index){
-        return SizedBox(height: 10,);
-      }, ),
+        child: Visibility(
+          visible: _getProgressTaskProgress==false,
+          replacement: Center(child: CircularProgressIndicator()),
+          child: ListView.separated(
+          itemCount: _progressTaskList.length,
+          itemBuilder: (context,index){
+            return task_card(taskModel: _progressTaskList[index],
+              cardColor: Colors.blue,
+              refreshParent: (){
+               _getAllTask();
+
+              },
+            );
+          }, separatorBuilder: (context,index){
+          return SizedBox(height: 10,);
+                }, ),
+        ),
       ),
     );
   }
