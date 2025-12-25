@@ -20,15 +20,19 @@ UserModel({required this.id,
   required this.email,
   required this.firstName,
   required this.lastName,
-  required this.mobile, required this.photo});
+  required this.mobile,
+  required this.photo
+
+  }
+);
 
  factory UserModel.fromJson(Map<String,dynamic>jsonData){
-  return UserModel(id: jsonData['id']??'',
+  return UserModel(id: jsonData['_id']??'',
       email: jsonData['email']??'',
       firstName: jsonData['firstName']??'',
       lastName: jsonData['lastName']??'',
       mobile: jsonData['mobile']??'',
-    photo: jsonData['mobile']??'',
+    photo: jsonData['photo']??'',
   );
   }
 
@@ -39,7 +43,7 @@ UserModel({required this.id,
      "firstName":firstName,
      "lastName":lastName,
      "mobile":mobile,
-
+     "photo" : photo
    };
   }
 

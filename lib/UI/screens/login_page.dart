@@ -1,13 +1,16 @@
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 import 'package:task_management/UI/controller/auth_controller.dart';
 import 'package:task_management/UI/screens/sign_up_screen.dart';
 
 import 'package:task_management/UI/widgets/screen_backround.dart';
 import 'package:task_management/data/model/user_model.dart';
+import 'package:task_management/provider/network_provider.dart';
 
 import '../../data/Utils/urls.dart';
 import '../../data/services/api_caller.dart';
+import '../../provider/auth_provider.dart';
 import 'forget_passward_email_varified.dart';
 import 'nav_bar_holder_screen.dart';
 
@@ -151,33 +154,21 @@ class _LoginPageState extends State<LoginPage> {
     );
   }
 
+
   _clearTextFeild(){
     _emailController.clear();
     _passwardController.clear();
   }
 
   Future<void> _singIn() async {
+  final networkProvider=Provider.of<NetworkProvider>(context,listen: false);
+  final authProvider=Provider.of<AuthProvider>(context,listen: false);
+   final result=await networkProvider.login(
+       email: _emailController.text.trim(),
+       passward: _passwardController.text);
 
-    setState(() {
-      _singInProgress=true;
-    });
-    Map<String,dynamic>requestBody={
-      "email":_emailController.text,
-
-      "password":_passwardController.text,
-    };
-    final ApiResponse response=await ApiCaller.postRequest(
-      url: Urls.loginUrl,
-      body: requestBody,
-    );
-    setState(() {
-      _singInProgress=false;
-    });
-    if(response.isSuccess){
-      UserModel model=UserModel.fromJson(response.responseData);
-      String accessToken=response.responseData['token'];
-      await AuthController .saveUserData(model, accessToken);
-
+   if(result!=null){
+     await authProvider.saveUserData(result['user'], result['token']);
       _clearTextFeild();
       ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text('SingIn Success!'),
         backgroundColor: Colors.green,duration: Duration(seconds: 3),)
@@ -189,7 +180,7 @@ class _LoginPageState extends State<LoginPage> {
     }
 
     else{
-      ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text(response.responseData['data']),
+      ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text(networkProvider.errorMassage??'Something worng'),
         backgroundColor: Colors.red,duration: Duration(seconds: 3),));
     }
 

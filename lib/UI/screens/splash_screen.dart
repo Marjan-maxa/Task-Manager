@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:provider/provider.dart';
 import 'package:task_management/UI/controller/auth_controller.dart';
 import 'package:task_management/UI/utils/assets_path.dart';
 import 'package:task_management/UI/widgets/screen_backround.dart';
+import 'package:task_management/provider/auth_provider.dart';
 
 import 'login_page.dart';
 class SplashScreen extends StatefulWidget {
@@ -23,10 +25,10 @@ class _SplashScreenState extends State<SplashScreen> {
   Future<void>moveToNextScreen()
   async {
     await Future.delayed(Duration(seconds: 3));
+    final authProvider=Provider.of<AuthProvider>(context,listen: false);
 
-    final bool isLogInn=await AuthController.isLogIn();
-
-    if(isLogInn){
+    authProvider.loadUserData();
+    if(authProvider.isLoggedIn){
       Navigator.pushReplacementNamed(context, '/NavBar');
     }else{
       Navigator.pushReplacement(context, MaterialPageRoute(builder: (context)=>LoginPage()));

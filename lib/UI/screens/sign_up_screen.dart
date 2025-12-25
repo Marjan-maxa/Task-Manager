@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 import 'package:task_management/UI/widgets/screen_backround.dart';
 import 'package:task_management/data/services/api_caller.dart';
 import 'package:task_management/data/utils/urls.dart';
+import 'package:task_management/provider/network_provider.dart';
 
 import 'forget_passward_varified_otp_screen.dart';
 
@@ -189,30 +191,22 @@ class SingUpScreen extends StatefulWidget {
   }
 
   Future<void> _singUp() async {
+    final networkProvider=Provider.of<NetworkProvider>(context,listen: false);
+    final result1=networkProvider.register(
+        email: _emailController.text.trim(),
+        firstName: _firstNameController.text.trim(),
+        lastName: _lastNameController.text.trim(),
+        mobile: _mobileController.text.trim(),
+        passward: _passwardController.text);
 
-setState(() {
-  _singUpInProgress=true;
-});
-    Map<String,dynamic>requestBody={
-      "email":_emailController.text,
-      "firstName":_firstNameController.text,
-      "lastName":_lastNameController.text,
-      "mobile":_mobileController.text,
-      "password":_passwardController.text,
-    };
-    final ApiResponse response=await ApiCaller.postRequest(
-      url: Urls.registrationUrl,
-      body: requestBody,
-    );
-    setState(() {
-      _singUpInProgress=false;
-    });
-    if(response.isSuccess){
+    if(result1!=null){
       _clearTextFeild();
       ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text('SingUp Success!'),
         backgroundColor: Colors.green,duration: Duration(seconds: 3),));
+      Navigator.pop(context);
     }else{
-      ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text(response.responseData['data']),
+      ScaffoldMessenger.of(context).showSnackBar
+        (SnackBar(content: Text(networkProvider.errorMassage??'Something worng'),
         backgroundColor: Colors.red,duration: Duration(seconds: 3),));
     }
 
