@@ -182,6 +182,8 @@ class _LoginPageState extends State<LoginPage> {
     else{
       ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text(networkProvider.errorMassage??'Something worng'),
         backgroundColor: Colors.red,duration: Duration(seconds: 3),));
+
+
     }
 
   }

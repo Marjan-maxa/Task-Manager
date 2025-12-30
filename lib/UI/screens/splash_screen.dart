@@ -28,7 +28,7 @@ class _SplashScreenState extends State<SplashScreen> {
     final authProvider=Provider.of<AuthProvider>(context,listen: false);
 
     authProvider.loadUserData();
-    if(authProvider.isLoggedIn){
+    if(authProvider.isLoginn){
       Navigator.pushReplacementNamed(context, '/NavBar');
     }else{
       Navigator.pushReplacement(context, MaterialPageRoute(builder: (context)=>LoginPage()));
