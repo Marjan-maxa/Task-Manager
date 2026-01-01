@@ -169,6 +169,7 @@ class _LoginPageState extends State<LoginPage> {
 
    if(result!=null){
      await authProvider.saveUserData(result['user'], result['token']);
+     ApiCaller.accessToken = result['token'];
       _clearTextFeild();
       ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text('SingIn Success!'),
         backgroundColor: Colors.green,duration: Duration(seconds: 3),)

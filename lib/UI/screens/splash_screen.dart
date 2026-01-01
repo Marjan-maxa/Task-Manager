@@ -25,9 +25,10 @@ class _SplashScreenState extends State<SplashScreen> {
   Future<void>moveToNextScreen()
   async {
     await Future.delayed(Duration(seconds: 3));
-    final authProvider=Provider.of<AuthProvider>(context,listen: false);
 
-    authProvider.loadUserData();
+    final authProvider=Provider.of<AuthProvider>(context,listen: false);
+    await authProvider.loadUserData();
+
     if(authProvider.isLoginn){
       Navigator.pushReplacementNamed(context, '/NavBar');
     }else{

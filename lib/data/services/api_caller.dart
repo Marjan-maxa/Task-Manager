@@ -8,14 +8,14 @@ import '../../app.dart';
 class ApiCaller{
 
   static final Logger _logger=Logger();
-
+  static String ? accessToken;
  static Future<ApiResponse> getRequest({required String url })
   async {
    try{
      Uri uri=Uri.parse(url);
      logRequest(url);
      Response response =await get(uri,headers: {
-       'token':AuthController.accessToken??''
+       'token':accessToken??''
      });
      logReponse(url, response);
      final int statusCode=response.statusCode;
@@ -24,7 +24,7 @@ class ApiCaller{
      {
        return ApiResponse(responseCode: statusCode, responseData: decodedData, isSuccess: true);
      }else if(statusCode==401){
-       moveToLogin();
+      await moveToLogin();
        return ApiResponse(responseCode: -1, responseData: null, isSuccess: false);
      }
      else{
@@ -38,15 +38,16 @@ class ApiCaller{
  static Future<ApiResponse> postRequest({required String url,Map<String,dynamic>? body })
   async {
     try{
+      logRequest(url,body:body );
       Uri uri=Uri.parse(url);
-      logRequest(url);
       Response response =await post(uri,
-        body: body!=null ? jsonEncode(body): null,
+
         headers: {
           'Accept':'application/json',
           'Content-Type':'application/json',
-          'token':AuthController.accessToken??''
-        }
+          'token':accessToken??''
+        },
+        body: body!=null ? jsonEncode(body): null,
       );
       logReponse(url, response);
       final int statusCode=response.statusCode;
@@ -78,15 +79,15 @@ class ApiCaller{
   static void logReponse(String Url,Response response)
   {
     _logger.i(
+             'URL => $Url\n'
             'Status Code=> ${response.statusCode}\n'
             'Response body=> ${response.body}\n'
     );
   }
 
   static Future<void> moveToLogin()async {
-   AuthController.userClearData();
-   final context = TaskManagement.navigator.currentContext;
-   if (context == null) return;
+    await AuthController.userClearData();
+
    Navigator.pushNamedAndRemoveUntil(TaskManagement.navigator.currentContext!, '/Login', (predicate)=>false);
   }
 

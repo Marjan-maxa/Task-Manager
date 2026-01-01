@@ -6,9 +6,9 @@ import 'package:task_management/core/enums/api_state.dart';
 import '../data/model/user_model.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 class AuthProvider extends ChangeNotifier{
-  static String ? _accessToken;
-  static String ? _errorMassage;
-  static UserModel ? _userModel;
+   String ? _accessToken;
+   String ? _errorMassage;
+   UserModel ? _userModel;
 ApiState _authState=ApiState.initial;
 
   static String _accessTokenKey = 'token';
@@ -81,6 +81,7 @@ ApiState _authState=ApiState.initial;
   }
   void resetState(){
     _authState=ApiState.initial;
+    _errorMassage = null;
     notifyListeners();
   }
 
