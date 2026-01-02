@@ -6,6 +6,8 @@ import 'package:task_management/UI/utils/assets_path.dart';
 import 'package:task_management/UI/widgets/screen_backround.dart';
 import 'package:task_management/provider/auth_provider.dart';
 
+import '../../data/services/api_caller.dart';
+import '../../provider/task_provider.dart';
 import 'login_page.dart';
 class SplashScreen extends StatefulWidget {
   const SplashScreen({super.key});
@@ -30,6 +32,8 @@ class _SplashScreenState extends State<SplashScreen> {
     await authProvider.loadUserData();
 
     if(authProvider.isLoginn){
+      ApiCaller.accessToken = authProvider.accessToken!;
+
       Navigator.pushReplacementNamed(context, '/NavBar');
     }else{
       Navigator.pushReplacement(context, MaterialPageRoute(builder: (context)=>LoginPage()));

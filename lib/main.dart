@@ -7,6 +7,7 @@ import 'package:task_management/provider/task_provider.dart';
 import 'app.dart';
 
 void main() {
+
   runApp(
 
     MultiProvider(providers: [

@@ -113,9 +113,9 @@ class _LoginPageState extends State<LoginPage> {
                 ),
                 const SizedBox(height: 20,),
                FilledButton(
-                   onPressed: (){
+                   onPressed: ()async{
                     if(_formkey.currentState!.validate()){
-                      _singIn();
+                      await _singIn();
                     }
                    }, child: Icon(Icons.arrow_circle_right_outlined,size: 23,)
                ),

@@ -25,7 +25,7 @@ class _NewTaskScreenState extends State<NewTaskScreen> {
 
  Future<void> loadData()async {
    final taskProvider=Provider.of<TaskProvider>(context,listen:false);
-   Future.wait([
+  await Future.wait([
    taskProvider.FetchCount(),
    taskProvider.FetchNewTaskByStatus('New')
    ]);

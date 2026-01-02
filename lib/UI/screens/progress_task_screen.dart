@@ -29,7 +29,7 @@ class _ProgressTaskScreenState extends State<ProgressTaskScreen> {
 
   Future<void> loadData()async {
     final taskProvider=Provider.of<TaskProvider>(context,listen:false);
-    Future.wait([
+   await Future.wait([
 
       taskProvider.FetchNewTaskByStatus('Progress')
     ]);

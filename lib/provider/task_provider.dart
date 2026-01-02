@@ -29,7 +29,7 @@ class TaskProvider extends ChangeNotifier{
 
 Future<void>FetchCount() async {
   _taskCountState=ApiState.loading;
-  notifyListeners();
+
   final ApiResponse response=
   await ApiCaller.getRequest(url: Urls.taskStatusCountUrl);
   if(response.isSuccess){
@@ -50,7 +50,7 @@ Future<void>FetchCount() async {
 
  Future<void>FetchNewTaskByStatus(String status) async {
    _taskListState=ApiState.loading;
-notifyListeners();
+
   String url;
    switch(status){
      case('New'):

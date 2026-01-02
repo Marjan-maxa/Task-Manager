@@ -28,7 +28,7 @@ class _CencelledTaskScreenState extends State<CencelledTaskScreen> {
 
   Future<void> loadData()async {
     final taskProvider=Provider.of<TaskProvider>(context,listen:false);
-    Future.wait([
+   await Future.wait([
 
       taskProvider.FetchNewTaskByStatus('Cancelled')
     ]);

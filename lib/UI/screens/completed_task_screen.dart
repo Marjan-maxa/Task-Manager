@@ -33,7 +33,7 @@ class _CompletedTaskScreenState extends State<CompletedTaskScreen> {
 
   Future<void> loadData()async {
     final taskProvider=Provider.of<TaskProvider>(context,listen:false);
-    Future.wait([
+   await Future.wait([
 
       taskProvider.FetchNewTaskByStatus('Completed')
     ]);
