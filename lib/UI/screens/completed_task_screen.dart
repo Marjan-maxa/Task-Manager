@@ -52,7 +52,7 @@ class _CompletedTaskScreenState extends State<CompletedTaskScreen> {
               itemCount: taskProvider.completedTasks.length,
               itemBuilder: (context,index){
                 return task_card(taskModel: taskProvider.completedTasks[index],
-                  cardColor: Colors.blue,
+                  cardColor: Colors.green,
                   refreshParent: (){
 
                           loadData();

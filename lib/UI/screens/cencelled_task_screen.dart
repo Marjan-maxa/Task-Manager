@@ -47,7 +47,7 @@ class _CencelledTaskScreenState extends State<CencelledTaskScreen> {
               itemCount: taskProvider.cancelledTasks.length,
               itemBuilder: (context,index){
                 return task_card(taskModel: taskProvider.cancelledTasks[index],
-                  cardColor: Colors.blue,
+                  cardColor: Colors.red,
                   refreshParent: (){
                    loadData();
 

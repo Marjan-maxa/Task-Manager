@@ -49,7 +49,7 @@ class _ProgressTaskScreenState extends State<ProgressTaskScreen> {
             itemBuilder: (context,index){
               return task_card(
                 taskModel: taskProvider.progressTasks[index],
-                cardColor: Colors.blue,
+                cardColor: Colors.purple,
                 refreshParent: (){
                  loadData();
                 },
